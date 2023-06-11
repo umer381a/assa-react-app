@@ -1,0 +1,38 @@
+.location-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.location-card {
+    color: unset;
+    text-decoration: none;    
+    width: 320px;
+    padding: 15px 25px;
+    border-radius: 15px;
+    font-size: 14px;
+    background-color: #EFE04B;
+    & > h2 {
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    & > dl {
+        display: flex;
+        margin: 0;
+        & > dt {
+            min-width: 110px;
+        }
+        & > dd {
+            margin-left: 10px;
+            &::before {
+                content: ':';
+                margin-right: 5px;
+            }
+        }
+    }
+}
+

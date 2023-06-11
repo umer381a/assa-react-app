@@ -1,0 +1,36 @@
+
+:root {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.layout-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px 30px 30px;
+    border-bottom: 1px solid #11B0C81C;
+    justify-content: space-between;
+    & > .layout-backlink {
+        width: 60px;
+    }
+}
+
+.layout-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    height: calc(100vh - 140px);
+}
+
+.text-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

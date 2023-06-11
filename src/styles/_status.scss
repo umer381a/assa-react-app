@@ -1,0 +1,114 @@
+.status-btns {
+    display: flex;
+    gap: 10px;
+}
+
+
+.status-btn {
+    display: flex;
+    width: 120px;
+    align-items: center;
+    text-align: left;
+    font-weight: 500;
+    color: $brown;
+    padding: 15px 15px;
+    border-radius: 50px;
+    & > span {
+        margin-right: 10px;
+    }
+}
+
+.status-btn-unknown {
+    @extend .status-btn;
+    border: 1px solid rgba($color: $gray, $alpha: 0.5);
+    background-color: rgba($color: #fff, $alpha: 0.05); 
+    &:hover {
+        border: 1px solid $gray;
+        background-color: rgba($color: $gray, $alpha: 0.2); 
+    }
+    &:active {
+        border: 1px solid $gray;
+        background-color: rgba($color: $gray, $alpha: 0.5); 
+    }
+    &.active {
+        border: 1px solid $gray;
+        background-color: rgba($color: $gray, $alpha: 0.05); 
+        & > .status-unknown {
+            background-color: $gray;
+        }
+    }
+}
+
+
+.status-btn-alive {
+    @extend .status-btn;
+    border: 1px solid rgba($color: $green, $alpha: 0.5);
+    background-color: rgba($color: #fff, $alpha: 0.05); 
+    &:hover {
+        border: 1px solid $green;
+        background-color: rgba($color: $green, $alpha: 0.2); 
+    }
+    &:active {
+        border: 1px solid $green;
+        background-color: rgba($color: $green, $alpha: 0.5); 
+    }
+    &.active {
+        border: 1px solid $green;
+        background-color: rgba($color: $green, $alpha: 0.05); 
+        & > .status-alive {
+            background-color: $green;
+        }
+    }
+}
+
+.status-btn-dead {
+    @extend .status-btn;
+    border: 1px solid rgba($color: $red, $alpha: 0.5);
+    background-color: rgba($color: #fff, $alpha: 0.05); 
+    &:hover {
+        border: 1px solid $red;
+        background-color: rgba($color: $red, $alpha: 0.2); 
+    }
+    &:active {
+        border: 1px solid $red;
+        background-color: rgba($color: $red, $alpha: 0.5); 
+    }
+    &.active {
+        border: 1px solid $red;
+        background-color: rgba($color: $red, $alpha: 0.05); 
+        & > .status-dead {
+            background-color: $red;
+        }
+    }
+}
+
+.status {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.status-unknown {
+    @extend .status;
+    background-color: rgba($color: $gray, $alpha: 0.5);
+    &.active {
+        background-color: $gray;
+    }
+}
+
+.status-dead {
+    @extend .status;
+    background-color: rgba($color: $red, $alpha: 0.5);
+    &.active {
+        background-color: $red;
+    }
+}
+
+.status-alive {
+    @extend .status;
+    background-color: rgba($color: $green, $alpha: 0.5);
+    &.active {
+        background-color: $green;
+    }
+}

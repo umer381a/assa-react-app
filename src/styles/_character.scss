@@ -1,0 +1,45 @@
+.character-detail {
+    width: 100%;
+}
+
+.character-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+.character-card {
+    color: unset;
+    text-decoration: none;    
+    width: 225px;
+    border-radius: 15px;
+    font-size: 14px;
+    @media screen and (max-width: 600px) {
+        width: 210px;
+    }
+    & > h2 {
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0;
+        margin-bottom: 5px;
+    }
+    & > p {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    & > img {
+        width: 225px;
+        height: 225px;
+        background-color: $gray;
+        object-fit: fill;
+        border-radius: 25px;
+        @media screen and (max-width: 600px) {
+            width: 210px;
+            height: 210px;
+        }
+    }
+}
+
