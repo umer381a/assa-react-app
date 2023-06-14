@@ -22,7 +22,7 @@ export default function Location() {
 
   const { residents } = location || {};
 
-  const { data: characters } = useGetCharactersApi(residents);
+  const { data: characters } = useGetCharactersApi({ residents, locationPage });
 
   const result = useMemo(() => {
     let data: Character[] = [];

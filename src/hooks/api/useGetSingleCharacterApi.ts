@@ -4,20 +4,26 @@ import { Character } from "../../types";
 
 export const useGetSingleCharacterApi = ({
   characterId,
-  page,
+  locationPage,
 }: {
   characterId?: string;
-  page: string;
+  locationPage: string;
 }) => {
   return useQuery<Character, unknown, Character>({
-    queryKey: ["characters", characterId],
+    queryKey: ["characters","id" ,characterId],
     queryFn: () => {
       return http.get(`/character/${characterId}`).then((res) => res.data);
     },
     initialData() {
-      const cached = queryClient.getQueryData(["characters", page]);
-      console.log("characters", cached);
-      return undefined;
+      if (!characterId) return undefined;
+
+      const characters = queryClient.getQueryData<Character[]>([
+        "characters",
+        "locationPage",
+        locationPage,
+      ]);
+
+      return characters?.find((character) => character.id === +characterId);
     },
   });
 };

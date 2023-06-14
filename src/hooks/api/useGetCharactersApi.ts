@@ -4,13 +4,19 @@ import { Character } from "../../types";
 
 type ApiSuccess = Character | Character[];
 
-export const useGetCharactersApi = (residents: string[] = []) => {
+export const useGetCharactersApi = ({
+  locationPage,
+  residents = [],
+}: {
+  residents?: string[];
+  locationPage: string;
+}) => {
   const characterIds = residents
     .map((resident) => resident.split("/").pop())
     .filter(Boolean)
     .join(",");
   return useQuery<ApiSuccess, unknown, ApiSuccess>({
-    queryKey: ["characters", characterIds],
+    queryKey: ["characters", "locationPage", locationPage],
     queryFn: () => {
       return http.get(`/character/${characterIds}`).then((res) => res.data);
     },
