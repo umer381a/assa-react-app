@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Layout, LocationList, Pagination } from "../components";
 import { useGetLocationsApi } from "../hooks/api/useGetLocationsApi";
 import { searchParamsToObject } from "../lib/helpers";
+import { LocationListSketeton } from "../components/LocationListSkeleton";
 
 export default function Root() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -10,7 +11,7 @@ export default function Root() {
     return Number(searchParams.get("page") ?? 1);
   });
 
-  const { data: locations } = useGetLocationsApi(page);
+  const { isLoading, data: locations } = useGetLocationsApi(page);
 
   const { results, info } = locations || {};
 
@@ -22,7 +23,13 @@ export default function Root() {
 
   return (
     <Layout>
-      <LocationList locations={results} page={page} />
+      {
+        isLoading ? (
+          <LocationListSketeton/>
+        ) : (
+          <LocationList locations={results} page={page} />
+        )
+      }
       <Pagination
         page={page}
         onPageChange={handlePageChange}

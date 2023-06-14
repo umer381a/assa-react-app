@@ -3,7 +3,7 @@ import { Character } from "../types";
 
 type Props = {
   character: Character;
-    page: number;
+  page: number;
   locationPage: number;
 };
 

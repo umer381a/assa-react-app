@@ -7,6 +7,7 @@ import { useGetSingleLocationApi } from "../hooks/api/useGetSingleLocationApi";
 import { useGetCharactersApi } from "../hooks/api/useGetCharactersApi";
 import { usePaginator } from "../hooks/usePaginator";
 import { searchParamsToObject } from "../lib/helpers";
+import { CharacterListSkeleton } from "../components/CharacterListSkeleton";
 
 export default function Location() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,7 +23,10 @@ export default function Location() {
 
   const { residents } = location || {};
 
-  const { data: characters } = useGetCharactersApi({ residents, locationPage });
+  const { isLoading, data: characters } = useGetCharactersApi({
+    residents,
+    locationPage,
+  });
 
   const result = useMemo(() => {
     let data: Character[] = [];
@@ -47,16 +51,19 @@ export default function Location() {
     setSearchParams({ ...currentParams, page: nextPage.toString() });
   };
 
-
   return (
     <Layout backLink={`/locations?page=${locationPage}`}>
       <div className="character-detail">
         <CharacterStatusFilter onChange={setStatus} />
-        <CharacterList
-          characters={pageItems}
-          locationPage={+locationPage}
-          page={page}
-        />
+        {isLoading ? (
+          <CharacterListSkeleton />
+        ) : (
+          <CharacterList
+            characters={pageItems}
+            locationPage={+locationPage}
+            page={page}
+          />
+        )}
       </div>
       <Pagination
         pages={totalPages}
