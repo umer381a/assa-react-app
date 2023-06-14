@@ -3,14 +3,14 @@ import { Location } from "../types";
 
 type Props = {
   location: Location;
-  fromPage: number;
+  page: number;
 };
 
-export const LocationCard = ({ location, fromPage }: Props) => {
+export const LocationCard = ({ location, page }: Props) => {
   return (
     <Link
       className="location-card"
-      to={`/locations/${location.id}?fromPage=${fromPage}`}
+      to={`/locations/${location.id}?fromPage=${page}`}
     >
       <h2 className="text-overflow">{location.name || "-"}</h2>
       <dl>

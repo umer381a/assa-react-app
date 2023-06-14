@@ -3,12 +3,15 @@ import { Character } from "../types";
 
 type Props = {
   character: Character;
+    page: number;
+  locationPage: number;
 };
 
-export const CharacterCard = ({ character }: Props) => {
+export const CharacterCard = ({ character , page, locationPage  }: Props) => {
   const { status, species } = character;
   return (
-    <Link className="character-card" to={`/characters/${character.id}`}>
+    <Link className="character-card" 
+      to={`/characters/${character.id}?fromPage=${page}&locationPage=${locationPage}`}>
       <img src={character.image} alt={`character face`} />
       <h2 className="text-overflow">{character.name}</h2>
       <p>

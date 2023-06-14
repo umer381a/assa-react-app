@@ -22,7 +22,7 @@ export default function Root() {
 
   return (
     <Layout>
-      <LocationList locations={results} fromPage={page} />
+      <LocationList locations={results} page={page} />
       <Pagination
         page={page}
         onPageChange={handlePageChange}

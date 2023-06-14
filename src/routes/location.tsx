@@ -6,17 +6,18 @@ import { CharacterStatusFilter, Layout, Pagination } from "../components";
 import { useGetSingleLocationApi } from "../hooks/api/useGetSingleLocationApi";
 import { useGetCharactersApi } from "../hooks/api/useGetCharactersApi";
 import { usePaginator } from "../hooks/usePaginator";
+import { searchParamsToObject } from "../lib/helpers";
 
 export default function Location() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const params = useParams<{ locationId: string }>();
   const locationId = params.locationId;
-  const fromPage = searchParams.get("fromPage") || "1";
+  const locationPage = searchParams.get("locationPage") || "1";
 
   const [status, setStatus] = useState<CharacterStatus | undefined>();
   const { data: location } = useGetSingleLocationApi({
     locationId,
-    page: fromPage,
+    page: locationPage,
   });
 
   const { residents } = location || {};
@@ -37,15 +38,31 @@ export default function Location() {
 
   const { page, totalPages, pageItems, setPage } = usePaginator<Character>({
     items: result,
+    initialPage: Number(searchParams.get("page") || "1"),
   });
 
+  const handlePageChange = (nextPage: number) => {
+    setPage(nextPage);
+    const currentParams = searchParamsToObject(searchParams);
+    setSearchParams({ ...currentParams, page: nextPage.toString() });
+  };
+
+
   return (
-    <Layout backLink={`/locations?page=${fromPage}`}>
+    <Layout backLink={`/locations?page=${locationPage}`}>
       <div className="character-detail">
         <CharacterStatusFilter onChange={setStatus} />
-        <CharacterList characters={pageItems} />
+        <CharacterList
+          characters={pageItems}
+          locationPage={+locationPage}
+          page={page}
+        />
       </div>
-      <Pagination pages={totalPages} page={page} onPageChange={setPage} />
+      <Pagination
+        pages={totalPages}
+        page={page}
+        onPageChange={handlePageChange}
+      />
     </Layout>
   );
 }

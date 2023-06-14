@@ -3,18 +3,14 @@ import { LocationCard } from "./LocationCard";
 
 type Props = {
   locations?: Location[];
-  fromPage?: number;
+  page?: number;
 };
 
-export const LocationList = ({ locations = [], fromPage = 1 }: Props) => {
+export const LocationList = ({ locations = [], page = 1 }: Props) => {
   return (
     <div className="location-list">
       {locations.map((location) => (
-        <LocationCard
-          key={location.id}
-          location={location}
-          fromPage={fromPage}
-        />
+         <LocationCard key={location.id} location={location} page={page} />
       ))}
     </div>
   );
